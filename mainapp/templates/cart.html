@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>KarlShop | Cart Page </title>
+{% endblock %}
+{%block body%}
+
+<!-- ****** Top Discount Area Start ****** -->
+<section class="top-discount-area d-md-flex align-items-center">
+    <!-- Single Discount Area -->
+    <div class="single-discount-area">
+        <h5>Free Shipping &amp; Returns</h5>
+        <h6><a href="#">BUY NOW</a></h6>
+    </div>
+    <!-- Single Discount Area -->
+    <div class="single-discount-area">
+        <h5>20% Discount for all dresses</h5>
+        <h6>USE CODE: Colorlib</h6>
+    </div>
+    <!-- Single Discount Area -->
+    <div class="single-discount-area">
+        <h5>20% Discount for students</h5>
+        <h6>USE CODE: Colorlib</h6>
+    </div>
+</section>
+<!-- ****** Top Discount Area End ****** -->
+
+<!-- ****** Cart Area Start ****** -->
+{% if cart %}
+<div class="cart_area section_padding_100 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cart-table clearfix">
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Color</th>
+                                <th>Size</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart.values %}
+                            <tr>
+                                <td class="cart_product_img d-flex align-items-center">
+                                    <a href="#"><img src="{{item.pic}}" alt="Product"></a>
+                                    <h6>{{item.name}}</h6>
+                                </td>
+                                <td class="price"><span>{{item.color}}</span></td>
+                                <td class="price"><span>{{item.size}}</span></td>
+                                <td class="price"><span>&#8377;{{item.price}}</span></td>
+                                <td class="qty">
+                                    <div class="quantity">
+                                        <a href="/update-cart/{{item.id}}/dec/" class="bg-light p-2"><i
+                                                class="fa fa-minus" aria-hidden="true"></i></a>
+                                        <p class="p-3 mt-3">{{item.qty}}</p>
+                                        <a href="/update-cart/{{item.id}}/inc/" class="bg-light p-2"><i
+                                                class="fa fa-plus" aria-hidden="true"></i></a>
+                                    </div>
+                                </td>
+                                <td class="total_price"><span>&#8377;{{item.total}}</span></td>
+                                <td><a href="/delete-cart/{{item.id}}/" class="bg-light p-2"><i class="fa fa-trash"
+                                            aria-hiddesn="true"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-8"></div>
+            <div class="col-12 col-lg-4">
+                <div class="cart-total-area mt-10">
+                    <div class="cart-page-heading">
+                        <h5>Cart total</h5>
+                        
+                    </div>
+
+                    <ul class="cart-total-chart">
+                        <li><span>Subtotal</span> <span>&#8377;{{request.session.subtotal}}</span></li>
+                        <li><span>Shipping</span> <span>&#8377;{{request.session.shipping}}</span></li>
+                        <li><span><strong>Total</strong></span> <span><strong>&#8377;{{request.session.total}}</strong></span></li>
+                    </ul>
+                    <a href="/checkout/" class="btn karl-checkout-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<p class="text-center p-5">Your Cart Is Empty</p>
+<div class="w-100">
+    <a href="/shop/All/All/All" class="btn btn-primary w-25 m-auto d-block">Shop Now</a>
+</div>
+{% endif%}
+{% endblock %}

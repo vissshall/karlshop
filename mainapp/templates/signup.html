@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>KarlShop | Signup Page </title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid w-100 my-5">
+    <div class="m-auto" style="width:70%">
+        <h5 class="text-center"><span class="text-bold">Create</span> an Account </h5>
+        {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+            {{m}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <form action="/signup/" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6 mb-3">
+                    <input type="text" name="name" placeholder="Full Name : " class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="text" name="username" placeholder="User Name : " class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 mb-3">
+                    <input type="email" name="email" placeholder="Email Address : " class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="text" name="phone" placeholder="Phone Number : " class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <input type="password" name="password" placeholder="Password : " class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <input type="password" name="cpassword" placeholder="ConfirmPassword : " class="form-control">
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary w-100 btn-sm">Signup</button>
+            </div>
+        </form>
+        <a href="/login/" class="text-primary">Already User? Login To Your Account</a>
+    </div>
+</div>
+
+{% endblock %}

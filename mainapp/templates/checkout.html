@@ -1,0 +1,122 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>KarlShop | Checkout Page </title>
+{% endblock %}
+{%block body%}
+<section class="top-discount-area d-md-flex align-items-center">
+    <!-- Single Discount Area -->
+    <div class="single-discount-area">
+        <h5>Free Shipping &amp; Returns</h5>
+        <h6><a href="#">BUY NOW</a></h6>
+    </div>
+    <!-- Single Discount Area -->
+    <div class="single-discount-area">
+        <h5>20% Discount for all dresses</h5>
+        <h6>USE CODE: Colorlib</h6>
+    </div>
+    <!-- Single Discount Area -->
+    <div class="single-discount-area">
+        <h5>20% Discount for students</h5>
+        <h6>USE CODE: Colorlib</h6>
+    </div>
+</section>
+
+<!-- ****** Checkout Area Start ****** -->
+<div class="checkout_area section_padding_100">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <div class="order-details-confirmation mt-1 clearfix">
+
+                    <div class="cart-page-heading">
+                        <h5>Billing Address</h5>
+                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Name</th>
+                            <td>{{buyer.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>User Name</th>
+                            <td>{{buyer.username}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email Address</th>
+                            <td>{{buyer.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>{{buyer.phone}}</td>
+                        </tr>
+                        <tr>
+                            <th>Address Line 1</th>
+                            <td>{{buyer.addressline1}}</td>
+                        </tr>
+                        <tr>
+                            <th>Address Line 2</th>
+                            <td>{{buyer.addressline2}}</td>
+                        </tr>
+                        <tr>
+                            <th>Address Line 3</th>
+                            <td>{{buyer.addressline3}}</td>
+                        </tr>
+                        <tr>
+                            <th>PIN</th>
+                            <td>{{buyer.pin}}</td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>{{buyer.city}}</td>
+                        </tr>
+                        <tr>
+                            <th>State</th>
+                            <td>{{buyer.state}}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2"><a href="/update-profile/" class="btn btn-primary w-100">Update Profile</a>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+                <div class="order-details-confirmation">
+
+                    <div class="cart-page-heading">
+                        <h5>Your Order</h5>
+                    </div>
+
+                    <ul class="order-details-form mb-4">
+                        <li><span>Product</span> <span>Total</span></li>
+                        {% for item in request.session.cart.values %}
+                        <li class="border-bottom-0 mb-0"><span>{{item.name}}({{item.qty}} X
+                                &#8377;{{item.price}})</span> <span>&#8377;{{item.total}}</span></li>
+                        {% endfor %}
+                        <hr class="border-1 border-secondary">
+                        <li><span>Subtotal</span> <span>&#8377;{{request.session.subtotal}}</span></li>
+                        <li><span>Shipping</span> <span>&#8377;{{request.session.shipping}}</span></li>
+                        <li><span>Total</span> <span>&#8377;{{request.session.total}}</span></li>
+                    </ul>
+
+                    <form action="/placeholder/" method="post">
+                        {% csrf_token   %}
+                        <div class="mb-3">
+                            <label>Payment Mode</label>
+                            <select name="mode" class="form-control">
+                                <option value="COD">COD</option>
+                                <option value="Net Banking">Net Banking/UPI/CARD</option>
+                            </select>
+                        </div>
+                        <button class="btn karl-checkout-btn" type="submit">Place Order</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ****** Checkout Area End ****** -->
+
+{% endblock %}
